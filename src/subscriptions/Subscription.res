@@ -1,3 +1,11 @@
+module IncomingPacketConfig = %graphql(`
+  subscription IncomingPackets {
+    incoming_packets {
+      acknowledgement
+    }
+  }
+`)
+
 module CounterpartyConfig = %graphql(`
   subscription Counterparty($chainID: String!) {
     counterparty_chains(where :{chain_id: {_ilike: $chainID}}) @bsRecord{
@@ -10,6 +18,12 @@ module CounterpartyConfig = %graphql(`
     }
   }
   }`)
+
+let getPacket = () => {
+  let result = IncomingPacketConfig.use()
+
+  result
+}
 
 let getChainFilterList = chainID => {
   let result = CounterpartyConfig.use({chainID: chainID})
@@ -25,13 +39,11 @@ module Styles = {
 @react.component
 let make = () => {
   let chainSub = getChainFilterList("consumer")
+  Js.Console.log(PriceHook.getPrices())
 
   <div className=Styles.root>
     {switch chainSub {
-    | {data} => {
-        Js.Console.log(data)
-        React.null
-      }
+    | {data} => React.null
     | _ => React.null
     }}
   </div>

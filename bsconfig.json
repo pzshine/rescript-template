@@ -34,6 +34,9 @@
     "@rescript/react",
     "bs-css-emotion",
     "bs-css",
+    "bs-webapi",
+    "bs-axios",
+    "@ryyppy/rescript-promise",
     "@glennsl/bs-json"
   ]
 }
