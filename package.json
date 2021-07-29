@@ -31,6 +31,7 @@
     "bs-moment": "^0.6.0",
     "bs-webapi": "^0.19.1",
     "graphql": "15.3.0",
+    "moment": "^2.29.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "reason-promise": "1.1.1",
