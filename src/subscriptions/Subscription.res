@@ -1,3 +1,10 @@
+type connection_t = {connection_id: string}
+
+type counterparty_t = {
+  chainID: string,
+  connections: array<connection_t>,
+}
+
 module IncomingPacketConfig = %graphql(`
   subscription IncomingPackets {
     incoming_packets {

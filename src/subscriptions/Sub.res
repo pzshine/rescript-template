@@ -8,3 +8,18 @@
 //   | NoData => NoData
 //   };
 
+open ApolloClient__React_Hooks_UseSubscription
+
+type variant<'a> =
+  | Data('a)
+  | Error(ApolloError.t)
+  | Loading
+  | NoData
+
+let fromData = x =>
+  switch x {
+  | {data: Some(data)} => Data(data)
+  | {error: Some(error)} => Error(error)
+  | {loading: true} => Loading
+  | _ => NoData
+  }
