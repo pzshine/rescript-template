@@ -16,10 +16,22 @@ type variant<'a> =
   | Loading
   | NoData
 
-let fromData = x =>
-  switch x {
+let fromData = result =>
+  switch result {
   | {data: Some(data)} => Data(data)
   | {error: Some(error)} => Error(error)
   | {loading: true} => Loading
-  | _ => NoData
+  | {data: None, error: None, loading: false} => NoData
+  }
+
+// 1. loading: true, data: None
+// 2. loading: false, data: Some
+// 3. loading: true, data: Some
+
+let map = (result, f) =>
+  switch result {
+  | Data(data) => Data(data |> f)
+  | Loading => Loading
+  | Error(e) => Error(e)
+  | NoData => NoData
   }

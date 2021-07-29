@@ -1,4 +1,4 @@
-let graphqlEndpoint = "ibc.d3n.xyz/v1/graphql"
+let graphqlEndpoint = "graphql-lt2.bandchain.org/v1/graphql"
 
 let headers = {"high": "five"}
 
