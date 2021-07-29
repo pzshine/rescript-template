@@ -7,16 +7,25 @@ module IncomingPacketConfig = %graphql(`
 `)
 
 module CounterpartyConfig = %graphql(`
-  subscription Counterparty($chainID: String!) {
+  subscription Counterparty($chainID: String) {
     counterparty_chains(where :{chain_id: {_ilike: $chainID}}) @bsRecord{
-    chainID: chain_id
-    connections @bsRecord{
-      channels @bsRecord{
-        channel
-        port
+      chainID: chain_id
+      connections @bsRecord{
+        channels @bsRecord{
+          channel
+          port
+        }
       }
     }
-  }
+  }`)
+
+module TxCountConfig = %graphql(`
+  subscription TransactionsCount {
+    transactions_aggregate @bsRecord{
+      aggregate {
+        count
+      }
+    }
   }`)
 
 let getPacket = () => {
@@ -38,12 +47,16 @@ module Styles = {
 
 @react.component
 let make = () => {
-  let chainSub = getChainFilterList("consumer")
-  Js.Console.log(PriceHook.getPrices())
+  let chainSub = getChainFilterList(None)
+  let pageSize = 5
+  let latest5BlocksSub = BlockSub.getList(~pageSize, ~page=1, ())
 
   <div className=Styles.root>
-    {switch chainSub {
-    | {data} => React.null
+    {switch latest5BlocksSub {
+    | {data: Some({blocks})} => {
+        Js.log(blocks[0].timestamp)
+        React.null
+      }
     | _ => React.null
     }}
   </div>

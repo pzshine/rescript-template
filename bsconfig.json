@@ -1,7 +1,7 @@
 {
   "name": "examples",
   "graphql": {
-    "apolloMode": true,
+    "apolloMode": false,
     "extendMutation": "ApolloClient.GraphQL_PPX.ExtendMutation",
     "extendQuery": "ApolloClient.GraphQL_PPX.ExtendQuery",
     "extendSubscription": "ApolloClient.GraphQL_PPX.ExtendSubscription",
@@ -34,6 +34,7 @@
     "@rescript/react",
     "bs-css-emotion",
     "bs-css",
+    "bs-moment",
     "bs-webapi",
     "bs-axios",
     "@ryyppy/rescript-promise",
